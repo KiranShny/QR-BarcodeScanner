@@ -14,8 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import io.github.kiranshny.qrscanner.ui.theme.QRScannerTheme
 
 @Composable
@@ -24,6 +26,7 @@ fun MainScreen(
     onScanClick: () -> Unit = {}
 ) {
     Column {
+        TitleBar()
         ScanHistoryCard(onHistoryClick)
         ScanQRCard(onScanClick)
     }
@@ -82,6 +85,15 @@ fun ScanQRCard(onScanClick: () -> Unit) {
     }
 }
 
+@Composable
+fun TitleBar() {
+    Text(
+        text = "Scanner",
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W700
+    )
+}
+
 
 @Preview
 @Composable
@@ -96,5 +108,21 @@ fun ScanHistoryCardPreview() {
 fun ScanQRCardPreview() {
     QRScannerTheme {
         ScanQRCard {}
+    }
+}
+
+@Preview
+@Composable
+fun TitlePreview() {
+    QRScannerTheme {
+        TitleBar()
+    }
+}
+
+@Preview
+@Composable
+fun MainScreenPreview() {
+    QRScannerTheme {
+        MainScreen()
     }
 }
