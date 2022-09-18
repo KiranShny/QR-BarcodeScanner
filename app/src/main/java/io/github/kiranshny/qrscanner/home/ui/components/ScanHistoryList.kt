@@ -15,11 +15,15 @@ import com.airbnb.lottie.compose.*
 import io.github.kiranshny.qrscanner.R
 import io.github.kiranshny.qrscanner.home.domain.HomeState
 import io.github.kiranshny.qrscanner.home.theme.QRScannerTheme
+import iogithubkiranshnyqrscanner.ScanHistory
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
-fun ScanHistoryList(homeState: HomeState) {
+fun ScanHistoryList(
+    homeState: HomeState,
+    onItemClick: (ScanHistory) -> Unit
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Title()
         when (homeState) {
@@ -53,13 +57,14 @@ fun ScanHistoryList(homeState: HomeState) {
                 )
             }
             is HomeState.ScanHistoryFetched -> {
-                val dateFormatter = SimpleDateFormat("dd MMMM yyyy, HH:mm:ss", Locale.ENGLISH)
+                val dateFormatter = SimpleDateFormat("hh.mm aa·dd-MM-yyyy", Locale.ENGLISH)
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     items(homeState.scanHistory) { item ->
                         ScanHistoryItem(
                             item = item,
                             modifier = Modifier.fillMaxWidth(),
-                            dateFormatter = dateFormatter
+                            dateFormatter = dateFormatter,
+                            onClick = onItemClick
                         )
                     }
                 }
@@ -80,6 +85,8 @@ fun Title() {
 @Composable
 fun ScanHistoryListPreview() {
     QRScannerTheme {
-        ScanHistoryList(homeState = HomeState.Loading)
+        ScanHistoryList(homeState = HomeState.Loading) {
+
+        }
     }
 }

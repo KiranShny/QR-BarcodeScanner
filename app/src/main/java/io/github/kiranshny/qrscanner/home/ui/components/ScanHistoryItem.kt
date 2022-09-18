@@ -1,5 +1,6 @@
 package io.github.kiranshny.qrscanner.home.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -17,10 +18,15 @@ import java.text.SimpleDateFormat
 fun ScanHistoryItem(
     item: ScanHistory,
     dateFormatter: SimpleDateFormat,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (ScanHistory) -> Unit
 ) {
-    Card(modifier = modifier) {
-        Row {
+    Card(
+        modifier = modifier
+            .padding(start = 16.dp, bottom = 16.dp, end = 16.dp)
+            .clickable { onClick(item) },
+    ) {
+        Row(modifier = Modifier.padding(16.dp)) {
             Column {
                 Text(
                     text = item.content,

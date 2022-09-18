@@ -3,9 +3,7 @@
 package io.github.kiranshny.qrscanner.home.ui
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import io.github.kiranshny.qrscanner.exts.launch
 import io.github.kiranshny.qrscanner.home.domain.BarCodeContract
 import io.github.kiranshny.qrscanner.home.domain.HomeViewModel
 import io.github.kiranshny.qrscanner.home.theme.QRScannerTheme
@@ -41,8 +40,7 @@ fun HomeScreen() {
     val coroutineScope = rememberCoroutineScope()
     val barcodeLauncher = rememberLauncherForActivityResult(BarCodeContract()) { result ->
         result.qrCodeContent?.let { scannedContent ->
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(scannedContent))
-            context.startActivity(intent)
+            scannedContent.launch(context)
             viewModel.saveContent(content = scannedContent)
         }
     }
@@ -96,7 +94,12 @@ fun HomeScreen() {
                     }
                 }
             }
-            ScanHistoryList(homeState)
+            ScanHistoryList(
+                homeState = homeState,
+                onItemClick = { history ->
+                    history.content.launch(context)
+                }
+            )
         }
     }
 }
