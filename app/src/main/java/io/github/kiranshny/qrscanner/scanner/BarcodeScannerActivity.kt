@@ -21,7 +21,6 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-private const val PERMISSION_CAMERA_REQUEST = 1
 private const val RATIO_4_3_VALUE = 4.0 / 3.0
 private const val RATIO_16_9_VALUE = 16.0 / 9.0
 const val BARCODE_QR_CONTENT = "bar-code-qr-content"

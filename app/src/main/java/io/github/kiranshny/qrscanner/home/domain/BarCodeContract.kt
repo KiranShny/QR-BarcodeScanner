@@ -1,10 +1,10 @@
-package io.github.kiranshny.qrscanner.domain
+package io.github.kiranshny.qrscanner.home.domain
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
-import io.github.kiranshny.qrscanner.model.QRCodeResult
+import io.github.kiranshny.qrscanner.home.model.QRCodeResult
 import io.github.kiranshny.qrscanner.scanner.BarcodeScannerActivity
 
 const val BARCODE_QR_CONTENT = "bar-code-qr-content"

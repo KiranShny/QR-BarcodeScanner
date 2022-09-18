@@ -1,4 +1,4 @@
-package io.github.kiranshny.qrscanner.ui.theme
+package io.github.kiranshny.qrscanner.home.theme
 
 import androidx.compose.ui.graphics.Color
 

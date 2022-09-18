@@ -1,4 +1,4 @@
-package io.github.kiranshny.qrscanner
+package io.github.kiranshny.qrscanner.home.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -14,7 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.*
-import io.github.kiranshny.qrscanner.ui.theme.QRScannerTheme
+import io.github.kiranshny.qrscanner.R
+import io.github.kiranshny.qrscanner.home.theme.QRScannerTheme
 
 @Composable
 fun PermissionBottomSheet(

@@ -1,4 +1,4 @@
-package io.github.kiranshny.qrscanner.model
+package io.github.kiranshny.qrscanner.home.model
 
 data class QRCodeResult(
     val qrCodeContent: String? = null,

@@ -1,0 +1,14 @@
+CREATE TABLE scanHistory (
+  timeStamp INTEGER  NOT NULL,
+  content TEXT NOT NULL
+);
+
+insert:
+INSERT INTO scanHistory(timeStamp, content)
+VALUES (?, ?);
+
+fetchAll:
+SELECT * FROM scanHistory;
+
+clear:
+DELETE FROM scanHistory;
