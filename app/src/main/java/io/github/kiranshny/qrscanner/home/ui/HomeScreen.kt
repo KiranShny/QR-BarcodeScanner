@@ -44,7 +44,6 @@ fun HomeScreen() {
             viewModel.saveContent(content = scannedContent)
         }
     }
-    val homeState = viewModel.homeState
 
     val cameraPermissionState = rememberPermissionState(
         permission = Manifest.permission.CAMERA,
@@ -95,7 +94,7 @@ fun HomeScreen() {
                 }
             }
             ScanHistoryList(
-                homeState = homeState,
+                homeState = viewModel.homeState,
                 onItemClick = { history ->
                     history.content.launch(context)
                 }
