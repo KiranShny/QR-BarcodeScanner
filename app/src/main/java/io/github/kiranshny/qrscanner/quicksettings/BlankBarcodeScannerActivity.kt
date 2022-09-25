@@ -1,6 +1,10 @@
 package io.github.kiranshny.qrscanner.quicksettings
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +19,14 @@ class BlankBarcodeScannerActivity : AppCompatActivity() {
 
     private val barcodeLauncher = registerForActivityResult(BarCodeContract()) { result ->
         result.qrCodeContent?.let { scannedContent ->
-            scannedContent.launch(this)
+            scannedContent.launch(this).also { isLaunched ->
+                if (!isLaunched) {
+                    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clipData = ClipData.newPlainText("text", scannedContent)
+                    clipboardManager.setPrimaryClip(clipData)
+                    Toast.makeText(this, "Copied to clipboard!", Toast.LENGTH_LONG).show()
+                }
+            }
             viewModel.saveContent(content = scannedContent)
         }
         finish()
