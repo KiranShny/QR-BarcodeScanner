@@ -4,6 +4,7 @@ package io.github.kiranshny.qrscanner.home.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +16,11 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -34,13 +39,20 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen() {
     val context = LocalContext.current
+    val localClipboardManager = LocalClipboardManager.current
+    val hapticFeedback = LocalHapticFeedback.current
     val viewModel: HomeViewModel = viewModel()
     val bottomSheetScaffoldState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val coroutineScope = rememberCoroutineScope()
     val barcodeLauncher = rememberLauncherForActivityResult(BarCodeContract()) { result ->
         result.qrCodeContent?.let { scannedContent ->
-            scannedContent.launch(context)
+            scannedContent.launch(context).also { isLaunched ->
+                if (!isLaunched) {
+                    localClipboardManager.setText(AnnotatedString(scannedContent))
+                    Toast.makeText(context, "Copied to clipboard!", Toast.LENGTH_LONG).show()
+                }
+            }
             viewModel.saveContent(content = scannedContent)
         }
     }
@@ -57,7 +69,6 @@ fun HomeScreen() {
             }
         }
     )
-
     viewModel.loadScanHistory()
 
     ModalBottomSheetLayout(
@@ -97,6 +108,11 @@ fun HomeScreen() {
                 homeState = viewModel.homeState,
                 onItemClick = { history ->
                     history.content.launch(context)
+                },
+                onItemLongPress = { history ->
+                    localClipboardManager.setText(AnnotatedString(history.content))
+                    Toast.makeText(context, "Copied to clipboard!", Toast.LENGTH_LONG).show()
+                    hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                 }
             )
         }

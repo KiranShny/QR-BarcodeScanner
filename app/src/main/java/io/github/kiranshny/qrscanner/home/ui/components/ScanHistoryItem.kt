@@ -1,6 +1,6 @@
 package io.github.kiranshny.qrscanner.home.ui.components
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -8,6 +8,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,12 +20,18 @@ fun ScanHistoryItem(
     item: ScanHistory,
     dateFormatter: SimpleDateFormat,
     modifier: Modifier = Modifier,
-    onClick: (ScanHistory) -> Unit
+    onClick: (ScanHistory) -> Unit,
+    onLongClick: (ScanHistory) -> Unit
 ) {
     Card(
         modifier = modifier
             .padding(start = 16.dp, bottom = 16.dp, end = 16.dp)
-            .clickable { onClick(item) },
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = { onClick(item) },
+                    onLongPress = { onLongClick(item) }
+                )
+            }
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Column {

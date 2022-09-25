@@ -22,7 +22,8 @@ import java.util.*
 @Composable
 fun ScanHistoryList(
     homeState: HomeState,
-    onItemClick: (ScanHistory) -> Unit
+    onItemClick: (ScanHistory) -> Unit,
+    onItemLongPress: (ScanHistory) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Title()
@@ -64,7 +65,8 @@ fun ScanHistoryList(
                             item = item,
                             modifier = Modifier.fillMaxWidth(),
                             dateFormatter = dateFormatter,
-                            onClick = onItemClick
+                            onClick = onItemClick,
+                            onLongClick = onItemLongPress
                         )
                     }
                 }
@@ -85,8 +87,9 @@ fun Title() {
 @Composable
 fun ScanHistoryListPreview() {
     QRScannerTheme {
-        ScanHistoryList(homeState = HomeState.Loading) {
-
-        }
+        ScanHistoryList(homeState = HomeState.Loading,
+            onItemClick = {},
+            onItemLongPress = {}
+        )
     }
 }
