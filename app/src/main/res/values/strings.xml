@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">QRScanner</string>
     <string name="turn_flash_on_off">Turn Flash On/Off</string>
+    <string name="scan_qr">Scan a QR Code</string>
 </resources>
