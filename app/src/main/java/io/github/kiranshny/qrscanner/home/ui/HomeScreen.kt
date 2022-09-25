@@ -113,6 +113,9 @@ fun HomeScreen() {
                     localClipboardManager.setText(AnnotatedString(history.content))
                     Toast.makeText(context, "Copied to clipboard!", Toast.LENGTH_LONG).show()
                     hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                },
+                onClearClick = {
+                    viewModel.removeAllScanHistory()
                 }
             )
         }
