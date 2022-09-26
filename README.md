@@ -4,7 +4,7 @@
 - Uses MLKit for detecting barcodes/qr codes
 - SQL Delight for managing scan history
 - Homescreen built on Jetpack Compose
-- Quick tile support for accessing the scanner quicly from notification bar.
+- Quick setting tile support for accessing the scanner quicly from notification bar.
 - Suggestions / feedback are always welcome!
 Thanks
 <br/>
