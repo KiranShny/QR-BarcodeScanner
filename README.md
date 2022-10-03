@@ -1,4 +1,5 @@
 # BarcodeScanner
+[Read my article on Ghost](https://kiranshny.ghost.io/barcode-scanner-using-mlkit)
 
 ## iOS Style Barcode/QR code scanner.
 - Uses MLKit for detecting barcodes/qr codes
