@@ -1,11 +1,8 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package io.github.kiranshny.qrscanner.home.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.TextButton
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -27,12 +24,13 @@ import java.util.*
 
 @Composable
 fun ScanHistoryList(
+    modifier: Modifier = Modifier,
     homeState: HomeState,
     onItemClick: (ScanHistory) -> Unit,
     onItemLongPress: (ScanHistory) -> Unit,
     onClearClick: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth()) {
         when (homeState) {
             is HomeState.Loading -> {
                 Title()

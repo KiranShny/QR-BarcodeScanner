@@ -14,9 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ScanHistoryCard(onHistoryClick: () -> Unit) {
+fun ScanHistoryCard(
+    modifier: Modifier = Modifier,
+    onHistoryClick: () -> Unit
+) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
     ) {

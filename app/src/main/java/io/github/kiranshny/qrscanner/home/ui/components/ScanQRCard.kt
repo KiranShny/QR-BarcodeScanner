@@ -15,9 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ScanQRCard(onScanClick: () -> Unit) {
+fun ScanQRCard(
+    modifier: Modifier = Modifier,
+    onScanClick: () -> Unit
+) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
             .clickable {

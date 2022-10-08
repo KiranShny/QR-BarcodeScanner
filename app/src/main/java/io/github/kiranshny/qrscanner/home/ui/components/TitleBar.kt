@@ -8,13 +8,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 @Composable
-fun TitleBar() {
+fun TitleBar(
+    modifier: Modifier = Modifier
+) {
     Text(
         text = "Scanner",
         fontSize = 20.sp,
         fontWeight = FontWeight.W700,
-        modifier = Modifier.padding(start = 16.dp, top = 26.dp)
+        modifier = modifier.padding(start = 16.dp, top = 26.dp)
     )
 }

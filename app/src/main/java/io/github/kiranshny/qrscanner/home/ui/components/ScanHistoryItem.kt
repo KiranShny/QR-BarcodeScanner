@@ -17,9 +17,9 @@ import java.text.SimpleDateFormat
 
 @Composable
 fun ScanHistoryItem(
+    modifier: Modifier = Modifier,
     item: ScanHistory,
     dateFormatter: SimpleDateFormat,
-    modifier: Modifier = Modifier,
     onClick: (ScanHistory) -> Unit,
     onLongClick: (ScanHistory) -> Unit
 ) {
