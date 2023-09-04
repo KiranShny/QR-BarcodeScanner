@@ -72,7 +72,10 @@ class BarcodeScannerActivity : AppCompatActivity() {
 
         previewUseCase = Preview.Builder()
             .setTargetAspectRatio(screenAspectRatio)
-            .setTargetRotation(binding.previewView.display.rotation)
+            // Fixed: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getRotation()' on a null object reference
+            // After the code was successfully scanned, I attempted to scan it again and caught this exception.
+            // So I fixed with Rotation value '0' - this works in all cases.
+            .setTargetRotation(Surface.ROTATION_0) 
             .build()
         previewUseCase.setSurfaceProvider(binding.previewView.surfaceProvider)
 
@@ -125,7 +128,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
 
         analysisUseCase = ImageAnalysis.Builder()
             .setTargetAspectRatio(screenAspectRatio)
-            .setTargetRotation(binding.previewView.display.rotation)
+            .setTargetRotation(Surface.ROTATION_0) // Fixed: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.view.Display.getRotation()' on a null object reference
             .build()
 
         val cameraExecutor = Executors.newSingleThreadExecutor()
